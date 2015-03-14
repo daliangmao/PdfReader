@@ -1,6 +1,10 @@
 package com.devappcenter.pdfreader;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.artifex.mupdfdemo.MuPDFActivity;
 import com.devappcenter.theme.Google.GoogleFragmentFeeder;
 
 import org.apache.http.NameValuePair;
@@ -20,6 +25,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +41,8 @@ import Helper.ViewCell;
  * Created by Andy on 3/14/15 AD.
  */
 public class BookViewController extends GoogleFragmentFeeder {
+
+    private ProgressDialog progressDialog;
 
     @Override
     public String setHeaderMenuWithTitle() {
@@ -65,7 +78,10 @@ public class BookViewController extends GoogleFragmentFeeder {
 
     @Override
     public void OnItemClick(Integer position) {
-
+        ViewItem item = (ViewItem) adapter.getItem(position);
+        progressDialog = ProgressDialog.show(getActivity(),"","Loading..", true);
+        String location = getActivity().getDir("book_preview", android.content.Context.MODE_PRIVATE).getAbsolutePath() + "/preview.pdf";
+        new DownloadFileAsync().execute(item.getPreview(), location, item.getTitle());
     }
 
     private class ViewItem extends ViewCell {
@@ -93,6 +109,76 @@ public class BookViewController extends GoogleFragmentFeeder {
                 e.printStackTrace();
             }
             return view;
+        }
+
+        public String getTitle() {
+            String title = null;
+            try {
+                title = jsonItem.getString("title");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return title;
+        }
+
+        public String getPreview() {
+            String preview = null;
+            try {
+                preview = jsonItem.getString("preview");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return preview;
+        }
+    }
+
+    class DownloadFileAsync extends AsyncTask<String, String, Void>
+    {
+        String location, title;
+
+        @Override
+        protected Void doInBackground(String... params){
+            int count;
+            String strUrl = params[0];
+            location = params[1];
+            title = params[2];
+            try {
+                //URL url = new URL(params[0].get("url"));
+                URL url = new URL(strUrl);
+                URLConnection conexion = url.openConnection();
+                conexion.connect();
+
+                InputStream input = new BufferedInputStream(url.openStream());
+                OutputStream output = new FileOutputStream(location);
+
+                byte data[] = new byte[1024];
+
+                long total = 0;
+
+                while ((count = input.read(data)) != -1){
+                    total += count;
+                    output.write(data, 0, count);
+                }
+                output.flush();
+                output.close();
+                input.close();
+            } catch (Exception e) {}
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result)
+        {
+            Bundle bundle = new Bundle();
+            Uri uri = Uri.parse(location);
+            progressDialog.cancel();
+            bundle.putString("title", title);
+            bundle.putBoolean("preview", true);
+            Intent intent = new Intent(getActivity(), MuPDFActivity.class);
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setData(uri);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     }
 }
