@@ -14,8 +14,14 @@ import android.widget.TextView;
 
 import com.devappcenter.theme.Google.GoogleFragmentFeeder;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import Helper.ImageLoader;
 import Helper.ViewCell;
@@ -31,6 +37,11 @@ public class BookViewController extends GoogleFragmentFeeder {
     }
 
     @Override
+    public String getUrl() {
+        return "http://www.lightoflovenovel.com/ebook/ios/discover.php";
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return super.onCreateView(inflater, new ListView(getActivity()), savedInstanceState);
     }
@@ -38,6 +49,18 @@ public class BookViewController extends GoogleFragmentFeeder {
     @Override
     public ViewCell cellForItemAtIndex(JSONObject obj, Integer position) {
         return new ViewItem(getActivity(), obj);
+    }
+
+    @Override
+    public JSONArray arrayOfItem(String result) throws JSONException{
+        return new JSONArray(result).getJSONArray(0);
+    }
+
+    @Override
+    protected List<NameValuePair> getPostValue() {
+        List<NameValuePair> postValue = super.getPostValue();
+        postValue.add(new BasicNameValuePair("filter", "new_entry"));
+        return postValue;
     }
 
     @Override
@@ -65,7 +88,7 @@ public class BookViewController extends GoogleFragmentFeeder {
                 Integer price = jsonItem.getInt("price");
                 lblTitle.setText(jsonItem.getString("title"));
                 lblPrice.setText(String.format("%d บาท", price));
-                imageLoader.DisplayImage(jsonItem.getString("image"), imgCover);
+                imageLoader.DisplayImage(jsonItem.getString("thumb"), imgCover);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
