@@ -16,6 +16,12 @@ public class MainActivity extends GoogleActivity {
 
     @Override
     protected Fragment onFragmentAtMenu(int tag) {
+        switch (tag) {
+            case 0:
+                return new BookViewController();
+            case 1:
+                return new CartViewController();
+        }
         return null;
     }
 
@@ -23,10 +29,13 @@ public class MainActivity extends GoogleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
+        setMenu(new SidebarMenu(this), AppMenu.PREVIEW.ordinal());
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         Bundle args = new Bundle();
         args.putString("preload", getIntent().getStringExtra("discover"));
         BookViewController viewController = new BookViewController();
+        //CartViewController viewController = new CartViewController();
         viewController.setArguments(args);
         fragmentManager.beginTransaction().replace(R.id.content_frame, viewController, "DISCOVER_FRAGMENT").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
     }

@@ -93,4 +93,9 @@ public class GoogleFragmentFeeder extends FeedViewController implements Fragment
     public String setHeaderMenuWithTitle() {
         return null;
     }
+
+    @Override
+    public void setRightViewHeader(View view) {
+
+    }
 }

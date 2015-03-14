@@ -7,6 +7,7 @@ import android.view.View;
  */
 public interface FragmentListener {
     abstract View getRightViewHeader();
+    abstract void setRightViewHeader(View view);
     abstract View getSubViewHeader();
     abstract View getDrawerRightView();
     abstract String setHeaderBackWithTitle();

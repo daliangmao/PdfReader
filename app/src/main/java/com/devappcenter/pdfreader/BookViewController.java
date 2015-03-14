@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,10 +80,15 @@ public class BookViewController extends GoogleFragmentFeeder {
 
     @Override
     public void OnItemClick(Integer position) {
+        /*
         ViewItem item = (ViewItem) adapter.getItem(position);
         progressDialog = ProgressDialog.show(getActivity(),"","Loading..", true);
         String location = getActivity().getDir("book_preview", android.content.Context.MODE_PRIVATE).getAbsolutePath() + "/preview.pdf";
         new DownloadFileAsync().execute(item.getPreview(), location, item.getTitle());
+        */
+        FragmentManager fragmentManager = getFragmentManager();
+        PreviewBookViewController viewController = new PreviewBookViewController();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, viewController, "PREVIEW").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
     }
 
     private class ViewItem extends ViewCell {

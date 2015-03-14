@@ -82,6 +82,10 @@ public class ViewHeader extends Helper.Header.ViewHeader {
         if (view != null)
             ((ViewHeader)instance).subHeader.addView(view);
     }
+    public static View addRightPannel() {
+        ((ViewHeader)instance).removeRightPannelView();
+        return ((ViewHeader)instance).rightPannel;
+    }
 
     public static void removeSubMenu() {
         ((ViewHeader)instance).subHeader.removeAllViews();

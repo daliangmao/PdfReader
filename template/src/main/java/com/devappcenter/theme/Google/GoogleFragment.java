@@ -35,6 +35,7 @@ public class GoogleFragment extends Fragment implements FragmentListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewHeader.addRightPannelView(listener.getRightViewHeader());
         ViewHeader.addSubMenu(listener.getSubViewHeader());
+        listener.setRightViewHeader(ViewHeader.addRightPannel());
         ViewHeader.SubOpen(false);
         ViewHeader viewHeader = (ViewHeader) ViewHeader.getInstance();
         viewHeader.setOnBackWithTitle(listener.setHeaderBackWithTitle());
@@ -66,6 +67,11 @@ public class GoogleFragment extends Fragment implements FragmentListener{
     @Override
     public String setHeaderMenuWithTitle() {
         return null;
+    }
+
+    @Override
+    public void setRightViewHeader(View view) {
+
     }
 
 }
