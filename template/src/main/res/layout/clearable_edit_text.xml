@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:focusable="true">
+
+    <Helper.EditTextBackEvent
+        android:id="@+id/clearable_edit"
+        android:layout_width="220dp"
+        android:layout_height="32dp"
+        android:paddingRight="10dp"
+        android:background="@null"
+        android:textCursorDrawable="@null"
+        android:textSize="9pt"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:textColor="@android:color/white"
+        android:layout_toRightOf="@+id/btnMagnify"
+        android:textColorHint="@color/pinkbutton" />
+    <Button
+        android:id="@+id/clearable_button_clear"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:layout_alignParentRight="false"
+        android:background="@drawable/ic_clear"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/clearable_edit"
+        android:paddingRight="5dp" />
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/btnMagnify"
+        android:background="@null"
+        android:src="@drawable/ic_search"
+        android:scaleType="fitCenter"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="3dp" />
+
+</RelativeLayout>

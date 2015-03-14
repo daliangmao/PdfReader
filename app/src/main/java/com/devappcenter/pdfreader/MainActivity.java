@@ -1,39 +1,35 @@
 package com.devappcenter.pdfreader;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.devappcenter.theme.Google.GoogleActivity;
+import com.devappcenter.theme.Google.GoogleFragmentFeeder;
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends GoogleActivity {
+
+    @Override
+    protected Fragment onFragmentAtMenu(int tag) {
+        return null;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Bundle args = new Bundle();
+        args.putString("preload", getIntent().getStringExtra("discover"));
+        BookViewController viewController = new BookViewController();
+        viewController.setArguments(args);
+        fragmentManager.beginTransaction().replace(R.id.content_frame, viewController, "DISCOVER_FRAGMENT").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

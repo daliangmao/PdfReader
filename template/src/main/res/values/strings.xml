@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Theme</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="outbound">outbound</string>
+    <string name="inbound">inbound</string>
+    <string name="dot">.</string>
+</resources>

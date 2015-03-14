@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="220dp" android:layout_height="match_parent"
+    android:background="?android:attr/activatedBackgroundIndicator">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list_menu_item"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:choiceMode="singleChoice"
+        android:paddingLeft="0dp"
+        android:paddingBottom="20dp"
+        android:paddingRight="0dp"
+        android:divider="@null" />
+</RelativeLayout>

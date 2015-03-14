@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:startupUI="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <ImageView
+        android:layout_width="34dp"
+        android:layout_height="48dp"
+        android:id="@+id/img_cart_cover"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Helper.TypefaceTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        startupUI:customTypeface="fonts/ThaiSansNeue-SemiBold.ttf"
+        android:textSize="10pt"
+        android:text="Title"
+        android:id="@+id/lbl_cart_title"
+        android:layout_alignTop="@+id/img_cart_cover"
+        android:layout_toRightOf="@+id/img_cart_cover"
+        android:textColor="@color/DarkGray"
+        android:layout_marginLeft="12dp"
+        android:layout_toStartOf="@+id/chk_cart_select"
+        android:layout_toLeftOf="@+id/chk_cart_select" />
+
+    <Helper.TypefaceTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        startupUI:customTypeface="fonts/ThaiSansNeue-Regular.ttf"
+        android:textSize="10pt"
+        android:text="Price"
+        android:id="@+id/lbl_cart_price"
+        android:textColor="@color/DarkGoldenrod"
+        android:layout_alignLeft="@+id/lbl_cart_title"
+        android:layout_alignStart="@+id/lbl_cart_title"
+        android:layout_below="@+id/lbl_cart_title" />
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/splash_container">
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+    <!--com.devappcenter.animation.WindowsLoadingAnimation
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:id="@+id/anim_loading" />
+    <com.devappcenter.animation.HangoutDotAnimation
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/anim_loading"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"/>
+    <ProgressBar
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/ctrlActivityIndicator"
+        android:indeterminateOnly="true"
+        android:keepScreenOn="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/img_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp" />
+    <include layout="@layout/activity_hangout_dot_anim" /-->
+</RelativeLayout>
